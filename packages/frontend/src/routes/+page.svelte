@@ -232,7 +232,7 @@
         {/if}
     </div>
     <div class="flex:1 w:full">
-        <div class="w:full p:8">
+        <div class="m:8">
             {#if most.length}
                 <h1 class="f:gold-80">誰是你的修課好夥伴？</h1>
             {/if}
