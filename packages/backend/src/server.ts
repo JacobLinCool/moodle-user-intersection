@@ -142,26 +142,32 @@ async function get_users(page: Page, course_id: number, opt: Options): Promise<U
 
         const rows = await page.$$("#participants > tbody > tr:not(.emptyrow)");
 
-        const users = await Promise.all(
-            rows.map(async (row) => {
-                const name =
-                    (await row.$eval("td:nth-child(1) > a", (a: HTMLAnchorElement) =>
-                        a.textContent?.trim(),
-                    )) || "";
-                const role =
-                    (await row.$eval("td:nth-child(2)", (td: HTMLTableCellElement) =>
-                        td.textContent?.trim(),
-                    )) || "";
-                const group =
-                    (await row.$eval("td:nth-child(3)", (td: HTMLTableCellElement) =>
-                        td.textContent?.trim(),
-                    )) || "";
-                const id = await row.$eval("td:nth-child(1) > a", (a: HTMLAnchorElement) =>
-                    Number(a.href.match(/id=(\d+)/)?.[1]),
-                );
-                return { name, role, group, id };
-            }),
-        );
+        const users = (
+            await Promise.all(
+                rows.map(async (row) => {
+                    try {
+                        const name =
+                            (await row.$eval("td:nth-child(1) > a", (a: HTMLAnchorElement) =>
+                                a.textContent?.trim(),
+                            )) || "";
+                        const role =
+                            (await row.$eval("td:nth-child(2)", (td: HTMLTableCellElement) =>
+                                td.textContent?.trim(),
+                            )) || "";
+                        const group =
+                            (await row.$eval("td:nth-child(3)", (td: HTMLTableCellElement) =>
+                                td.textContent?.trim(),
+                            )) || "";
+                        const id = await row.$eval("td:nth-child(1) > a", (a: HTMLAnchorElement) =>
+                            Number(a.href.match(/id=(\d+)/)?.[1]),
+                        );
+                        return { name, role, group, id };
+                    } catch (err) {
+                        return { name: "", role: "", group: "", id: 0 };
+                    }
+                }),
+            )
+        ).filter((user) => user.id !== 0);
 
         fs.writeFileSync(path.join(cache_dir, `${course_id}.json`), JSON.stringify(users, null, 2));
 
