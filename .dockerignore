@@ -1,0 +1,6 @@
+.env
+.git/
+cache/
+**/storage/**
+**/.svelte-kit/
+**/build/

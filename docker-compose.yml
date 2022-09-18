@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      target: backend
+    image: jacoblincool/moodle-user-intersection-backend
+    environment:
+      - ENABLE_CACHE=true
+      - ENABLE_MEM_CACHE=true
+    volumes:
+      - ./cache:/app/cache
+    ports:
+      - 3000:3000

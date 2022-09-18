@@ -1,0 +1,16 @@
+---
+printWidth: 100
+tabWidth: 4
+useTabs: false
+trailingComma: all
+semi: true
+singleQuote: false
+overrides:
+  - files: "*.{md,yml,yaml}"
+    options:
+      tabWidth: 2
+  - files: "pnpm-lock.yaml"
+    options:
+      printWidth: 999
+      singleQuote: true
+      bracketSpacing: false

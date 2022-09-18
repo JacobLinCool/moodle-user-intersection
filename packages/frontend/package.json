@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "name": "frontend",
+    "version": "0.0.1",
+    "type": "module",
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    },
+    "dependencies": {
+        "@master/css": "^1.37.0",
+        "@master/keyframes.css": "^1.2.3",
+        "d3": "^7.6.1"
+    },
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "next",
+        "@sveltejs/adapter-static": "1.0.0-next.43",
+        "@sveltejs/kit": "next",
+        "@types/d3": "^7.4.0",
+        "svelte": "^3.44.0",
+        "svelte-check": "^2.7.1",
+        "svelte-preprocess": "^4.10.6",
+        "tslib": "^2.3.1",
+        "typescript": "^4.7.4",
+        "vite": "^3.1.0"
+    }
+}
