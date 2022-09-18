@@ -9,6 +9,9 @@ const config = {
 
     kit: {
         adapter: adapter({ fallback: "index.html" }),
+        paths: {
+            base: "/moodle-user-intersection",
+        },
     },
 };
 
