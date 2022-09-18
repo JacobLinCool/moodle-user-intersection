@@ -4,10 +4,6 @@
     import { fade } from "svelte/transition";
     import * as d3 from "d3";
 
-    const endpoint =
-        location.hostname === "localhost"
-            ? "http://localhost:3000/get"
-            : "https://mui.jacoblin.cool/get";
     let session = "";
     let data: {
         id: number;
@@ -24,7 +20,13 @@
         }
         fetching = true;
 
-        const response = await fetch(`${endpoint}?session=${session}`);
+        const response = await fetch(
+            `${
+                location?.hostname === "localhost" && !location.search.includes("remote")
+                    ? "http://localhost:3000/get"
+                    : "https://mui.jacoblin.cool/get"
+            }?session=${session}`,
+        );
         data = await response.json();
         fetching = false;
         console.log("fetched", data);
