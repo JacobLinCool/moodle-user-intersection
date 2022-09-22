@@ -3,6 +3,7 @@
     import "@master/keyframes.css";
     import { fade } from "svelte/transition";
     import CourseWeb from "$lib/CourseWeb.svelte";
+    import CommonLink from "$lib/CommonLink.svelte";
 
     let session = "";
     let data: {
@@ -108,6 +109,9 @@
                 {/each}
             </div>
             <div class="h:full w:full">
+            <div class="w:full">
+                <CommonLink data={data.filter((d) => selected.includes(d.id))} />
+            </div>
                 <CourseWeb data={data.filter((d) => selected.includes(d.id))} />
             </div>
         </div>
