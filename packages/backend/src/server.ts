@@ -72,7 +72,7 @@ async function get(opt: Options): Promise<{ id: number; name: string; users: Use
         ]);
 
         const page = await context.newPage();
-        const courses = await get_courses(page, opt);
+        const courses = (await get_courses(page, opt)).sort((a, b) => b.id - a.id);
         if (courses.length === 0) {
             throw new Error("No courses found");
         }
