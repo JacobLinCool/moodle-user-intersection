@@ -28,6 +28,7 @@
             }?session=${session}`,
         );
         data = await response.json();
+        data.sort((a, b) => b.id - a.id);
         fetching = false;
         console.log("fetched", data);
     }
