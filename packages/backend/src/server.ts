@@ -6,9 +6,8 @@ import ora from "ora";
 import chalk from "chalk";
 import { RateLimiter } from "./rate-limiter";
 import { find_chrome } from "./find-chrome";
+import { CACHE_DIR, ENABLE_CACHE, ENABLE_MEM_CACHE, PORT } from "./config";
 
-const ENABLE_CACHE = process.env.ENABLE_CACHE === "true";
-const ENABLE_MEM_CACHE = process.env.ENABLE_MEM_CACHE === "true";
 const MEM_CACHE = new Map<string, { id: number; name: string; users: User[] }[]>();
 
 const browser: Browser = await chromium.launch({ executablePath: find_chrome() });
@@ -20,10 +19,11 @@ process.on("SIGINT", async () => {
 const limiter = new RateLimiter({ concurrent: 4, interval: 1000, limit: 4 });
 const server = express().use(express.json());
 
-const cache_dir = path.resolve("cache");
+const cache_dir = path.resolve(CACHE_DIR);
 if (!fs.existsSync(cache_dir)) {
     fs.mkdirSync(cache_dir, { recursive: true });
 }
+
 server.use("/cache", express.static(cache_dir));
 
 server.get("/get", async (req, res) => {
@@ -48,8 +48,8 @@ server.get("/get", async (req, res) => {
     }
 });
 
-server.listen(3000, () => {
-    console.log(chalk.green("Server started at http://localhost:3000"));
+server.listen(PORT, () => {
+    console.log(chalk.green(`Server started at http://localhost:${PORT}`));
 });
 
 async function get(opt: Options): Promise<{ id: number; name: string; users: User[] }[]> {
