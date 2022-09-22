@@ -108,10 +108,10 @@
                     </div>
                 {/each}
             </div>
-            <div class="h:full w:full">
             <div class="w:full">
                 <CommonLink data={data.filter((d) => selected.includes(d.id))} />
             </div>
+            <div class="w:full">
                 <CourseWeb data={data.filter((d) => selected.includes(d.id))} />
             </div>
         </div>

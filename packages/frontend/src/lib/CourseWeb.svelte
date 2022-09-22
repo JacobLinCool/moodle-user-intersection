@@ -36,7 +36,7 @@
         const height = 1200;
 
         const svg = d3
-            .select("#graph")
+            .select("#course-web-graph")
             .attr("viewBox", [-width / 2, -height / 2, width, height])
             .style("font", "12px sans-serif");
 
@@ -63,7 +63,8 @@
             .selectAll("path")
             .data(links)
             .join("path")
-            .attr("stroke", "goldenrod");
+            .attr("stroke", "goldenrod")
+            .style("opacity", 0.7);
 
         const node = svg
             .append("g")
@@ -141,4 +142,4 @@
     }
 </script>
 
-<svg id="graph" class="w:full h:full" />
+<svg id="course-web-graph" class="my:16 b:1|solid|gold-80 r:4" />
