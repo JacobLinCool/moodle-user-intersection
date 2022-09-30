@@ -16,3 +16,5 @@
 > 但會儲存去識別化的名單，作為快取用途來加速服務，同時也避免造成 Moodle 負擔。
 
 > Moodle Session 在哪裡？ Moodle Session 存在 Moodle 網站的 Cookie 中，為 26 字元字串。
+
+https://user-images.githubusercontent.com/28478594/193317553-186fcef8-2e85-4b03-9bd8-98a3af58b865.mp4
